@@ -6,7 +6,6 @@ import fs from 'node:fs/promises';
 interface PropInfo {
     name: string;
     type?: string;
-    defaultValue?: string;
 }
 
 interface TemplateInfo {
@@ -29,15 +28,13 @@ const extractPropsFromFileContent = (fileContent: string): PropInfo[] | undefine
             const name = parts[0]?.trim();
             const typeAndDefault = parts[1]?.trim();
             let type: string | undefined;
-            let defaultValue: string | undefined;
 
             if (typeAndDefault) {
                 const defaultSplit = typeAndDefault.split('=');
                 type = defaultSplit[0]?.trim().replace('?', ''); // Remove optional marker
-                defaultValue = defaultSplit[1]?.trim();
             }
 
-            return { name, type, defaultValue };
+            return { name, type };
         })
         .filter((prop) => prop.name) // Ensure prop has a name
         .reduce((acc: PropInfo[], current) => {
