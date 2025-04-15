@@ -1,0 +1,24 @@
+{
+  "name": "email-service",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "email:dev": "email dev",
+    "email:build": "email build",
+    "dev": "bun --hot index.ts",
+    "export": "email export"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.0.36",
+    "hono": "^4.7.6",
+    "nodemailer": "^6.10.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.1",
+    "react-email": "^4.0.7"
+  }
+}
