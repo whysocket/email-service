@@ -36,9 +36,14 @@ export const sendEmailRoute = async (c: Context) => {
     }
 
     const body = await c.req.json();
+    if (!body) {
+        throw new Error('Request body is missing or invalid.');
+    }
+
     const { to, subject, template } = body;
     const { name, data } = template;
 
+    console.log(template)
     try {
         const emailsDir = getEmailsDirectory();
         const templatePath = path.join(emailsDir, `${name}.tsx`);
@@ -68,6 +73,8 @@ export const sendEmailRoute = async (c: Context) => {
             subject,
             html: emailHtml,
         });
+
+        console.log('email sent')
 
         return c.json({ status: 'Email sent' });
 

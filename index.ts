@@ -7,4 +7,7 @@ const app = new Hono();
 app.post('/send', sendEmailRoute);
 app.get('/templates', getTemplatesRoute);
 
-export default app;
+export default {
+    port: 63001,
+    fetch: app.fetch,
+  }
