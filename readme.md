@@ -26,7 +26,7 @@ This is an internal email microservice developed by **Xceltutors**, intended for
 
 ```bash
 # Clone the repository
-git clone https://your.repo.url
+git clone https://github.com/xceltutors/email-service.git
 
 # Navigate into the project directory
 cd email-service
@@ -57,7 +57,7 @@ Replace the placeholder values with the actual credentials and settings from you
 ## Running the Service
 
 ```bash
-bun run index.ts
+bun dev
 ```
 
 Once running, the following API endpoints will be available.
