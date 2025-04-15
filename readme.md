@@ -1,63 +1,85 @@
-# Internal Email Service - From Xceltutors
+**ℹ️ Proprietary to Xceltutors | Developed by whysocket (CTO, Xceltutors)**
 
-This is a simple internal email service, developed by the Xceltutors company, designed for use within an intranet environment. It provides an external API to send emails using pre-defined React email templates and to discover these templates.
+# 📬 Internal Email Service – Xceltutors
 
-## Features
+This is an internal email microservice developed by **Xceltutors**, intended for use within a private intranet. It exposes a simple API for sending emails using predefined React templates, as well as discovering available templates and their structure.
 
-* **Send Emails:** An API endpoint to send emails to specified recipients using dynamic React email templates.
-* **Template Discovery:** An API endpoint to list available email templates and their expected property names and types.
-* **Environment-Based Configuration:** Email server settings are configured via environment variables for flexibility.
+---
 
-## Getting Started
+## 🚀 Features
 
-### Prerequisites
+- **Send Emails**  
+  Easily send emails using dynamic React-based templates via a RESTful API.
 
-* Bun (JavaScript runtime) installed.
-* Node.js and npm (for installing dependencies).
+- **Template Discovery**  
+  Discover available templates and view their required properties and types.
 
-### Installation
+- **Environment-Driven Configuration**  
+  SMTP and email service configuration are handled via environment variables for flexibility and security.
 
-1.  Clone the repository (if applicable).
-2.  Navigate to the project directory in your terminal.
-3.  Install dependencies:
-    ```bash
-    bun install
-    ```
+---
 
-### Configuration
+## ⚙️ Getting Started
 
-1.  Create a `.env` file in the root of your project.
-2.  Configure the email server settings in the `.env` file:
-    ```dotenv
-    EMAIL_HOST=your_smtp_host.com
-    EMAIL_PORT=your_smtp_port
-    EMAIL_SECURE=false # Set to true for secure connections
-    EMAIL_USER=your_smtp_username
-    EMAIL_PASS=your_smtp_password
-    EMAIL_FROM=your_sending_email@yourdomain.com
-    ```
-    **Replace the placeholder values with your intranet email server details.**
+### ✅ Prerequisites
 
-### Running the Service
+- [Bun](https://bun.sh/) (JavaScript runtime)
+- Node.js & npm (used for dependency installation)
+
+### 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://your.repo.url
+
+# Navigate to the project directory
+cd internal-email-service
+
+# Install dependencies
+bun install
+```
+
+---
+
+## 🔐 Configuration
+
+Create a `.env` file in the root of the project and populate it with your SMTP/email settings:
+
+```dotenv
+EMAIL_HOST=smtp.yourdomain.com
+EMAIL_PORT=587
+EMAIL_SECURE=false # Set to true if using TLS/SSL
+EMAIL_USER=your_username
+EMAIL_PASS=your_password
+EMAIL_FROM=no-reply@yourdomain.com
+```
+
+> ⚠️ Replace placeholder values with your actual email server credentials.
+
+---
+
+## ▶️ Running the Service
 
 ```bash
 bun run index.ts
 ```
 
-The service will start, and the API endpoints will be available.
+The server will start and expose the following API endpoints.
 
-## API Endpoints
+---
+
+## 📡 API Endpoints
 
 ### `POST /send`
 
-Sends an email based on the provided template and data.
+Sends an email using a specified template and dynamic data.
 
-**Request Body:**
+#### ✅ Request Body
 
 ```json
 {
   "to": "recipient@example.com",
-  "subject": "Email Subject",
+  "subject": "Welcome to Xceltutors",
   "template": {
     "name": "WelcomeEmail",
     "data": {
@@ -67,52 +89,46 @@ Sends an email based on the provided template and data.
 }
 ```
 
-**Response:**
+#### 📥 Response Codes
 
-* `200 OK`: `{ "status": "Email sent" }`
-* `400 Bad Request`: For invalid request data or missing template component.
-* `404 Not Found`: If the specified email template is not found.
-* `500 Internal Server Error`: For issues during email sending or template loading.
+- `200 OK`: Email sent successfully  
+- `400 Bad Request`: Invalid input or missing template data  
+- `404 Not Found`: Template does not exist  
+- `500 Internal Server Error`: Email sending or template rendering failed
+
+---
 
 ### `GET /templates`
 
-Lists the available email templates and their expected property names and types (extracted from TypeScript interfaces/types within the template files). **Note:** Default values for properties are not included in this response.
+Returns a list of available email templates along with their expected property names and types.
 
-**Response:**
+#### 📤 Sample Response
 
 ```json
 [
   {
     "name": "WelcomeEmail",
     "props": [
-      {
-        "name": "username",
-        "type": "string"
-      }
+      { "name": "username", "type": "string" }
     ]
   },
   {
     "name": "Notification",
     "props": [
-      {
-        "name": "message",
-        "type": "string"
-      },
-      {
-        "name": "link",
-        "type": "string"
-      }
+      { "name": "message", "type": "string" },
+      { "name": "link", "type": "string" }
     ]
   }
 ]
 ```
 
-**Response:**
+#### 📥 Response Codes
 
-* `200 OK`: An array of template information.
-* `500 Internal Server Error`: If there's an error reading the templates directory.
+- `200 OK`: List returned successfully  
+- `500 Internal Server Error`: Error accessing or parsing templates
 
-## Internal Use
+---
 
-This service, developed by **Xceltutors company**, is intended for internal communication within the intranet. Ensure that the network is properly configured to allow communication between the service and the external API consumers within your organization.
-```
+## 🏢 Internal Use Only
+
+This microservice is **intended solely for internal use within the Xceltutors intranet**. Please ensure your internal network and security rules allow communication between this service and your organization's other services.
