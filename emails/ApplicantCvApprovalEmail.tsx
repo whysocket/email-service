@@ -8,42 +8,48 @@ import { Text } from '@react-email/text';
 import { Heading } from '@react-email/heading';
 import { Hr } from '@react-email/hr';
 
-type TutorApprovalEmailProps = {
-  fullName: string;
+type ApplicantCvApprovalEmailProps = {
+  applicantFullName?: string;
+  reviewerFullName?: string;
 };
 
-const TutorApprovalEmail = ({
-  fullName = 'New Tutor',
-}: TutorApprovalEmailProps) => (
+const ApplicantCvApprovalEmail = ({
+  applicantFullName = 'John Doe',
+  reviewerFullName = 'Jane Reviewer',
+}: ApplicantCvApprovalEmailProps) => (
   <Html>
     <Head />
-    <Preview>You've been approved as a tutor on Xceltutors!</Preview>
+    <Preview>Your CV has been approved — please select your interview time</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading as="h2" style={heading}>
-          Welcome aboard, {fullName}! 🎉
+          Hello {applicantFullName},
         </Heading>
 
         <Text style={text}>
-          We're excited to let you know that your application to become a tutor at Xceltutors has been approved!
+          Great news — your CV has been reviewed and approved by the Xceltutors team!
         </Text>
 
         <Text style={text}>
-          You now have access to your tutor dashboard where you can set up your services, update your profile, and start connecting with students.
+          You’ve been assigned to <strong>{reviewerFullName}</strong> for your upcoming interview.
         </Text>
 
         <Text style={text}>
-          We’re thrilled to have you on the team and can’t wait to see the impact you’ll make.
+          Please log in to your Xceltutors account and select an interview time from the availability provided by your reviewer.
+        </Text>
+
+        <Text style={text}>
+          We’re excited to move forward with your application and look forward to meeting you soon.
         </Text>
 
         <Hr style={hr} />
-        <Text style={footer}>– The Xceltutors Team</Text>
+        <Text style={footer}>— The Xceltutors Team</Text>
       </Container>
     </Body>
   </Html>
 );
 
-export default TutorApprovalEmail;
+export default ApplicantCvApprovalEmail;
 
 // --- Styles ---
 const main = {
