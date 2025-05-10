@@ -4,6 +4,9 @@ import { getTemplatesRoute } from './endpoints/templates';
 
 const app = new Hono();
 
+app.get('/health', (c) => {
+  return c.text('Healthy');
+});
 app.post('/send', sendEmailRoute);
 app.get('/templates', getTemplatesRoute);
 
